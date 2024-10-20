@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang web Lá Thư</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column; /* Đặt chiều dọc cho các phần tử */
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background: url("https://scontent.fsgn23-1.fna.fbcdn.net/v/t39.30808-6/453593534_878086794225995_1887890458516555016_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFJwqSMV35JmJ5lyxKABkrI8okDVSb79OfyiQNVJvv051ENWaCTT_k_w-BMTJ7YYLg3u4RrnvcHV3CU1WojQj8m&_nc_ohc=VV_DkGSPAvcQ7kNvgESuqoK&_nc_zt=23&_nc_ht=scontent.fsgn23-1.fna&_nc_gid=AIqNyDY5AWgdLXfBcxl8sVh&oh=00_AYDNELm8VSMSTAhaWyS45Jge8SRYJi2jgD2T6ugAuS_EcQ&oe=671A93B0")
+          no-repeat center center fixed; /* Đảm bảo hình nền không lặp lại */
+        background-size: cover; /* Làm cho hình nền phủ kín toàn bộ */
+      }
+
+      @keyframes typing {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+      @keyframes blink-caret {
+        from {
+          border-color: transparent;
+        }
+        to {
+          border-color: red;
+        }
+      }
+      .letter {
+        font-size: 24px; /* Kích thước chữ */
+        padding: 10px 15px; /* Giảm padding để làm cho nút nhỏ hơn */
+        text-align: center;
+        border-radius: 10px;
+        cursor: pointer;
+        animation: blink 1s infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+      .modal {
+        display: none;
+        position: fixed; /* Để modal luôn nằm ở vị trí cố định */
+        top: 50%; /* Giữa theo chiều dọc */
+        left: 50%; /* Giữa theo chiều ngang */
+        transform: translate(-50%, -50%); /* Đưa modal về giữa */
+        width: 300px; /* Đặt chiều rộng modal */
+        padding: 20px; /* Đặt khoảng cách bên trong */
+        background-color: rgba(
+          255,
+          255,
+          255,
+          0.8
+        ); /* Màu nền với độ trong suốt */
+        border-radius: 10px; /* Bo góc cho modal */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Đổ bóng cho modal */
+        background-image: url("./Xanh\ lá\ Đỏ\ Vàng\ Hình\ minh\ họa\ Ảnh\ bìa\ Facebook\ Mùa\ thu.png"); /* Thêm ảnh nền */
+        background-size: cover; /* Đảm bảo ảnh phủ kín modal */
+        z-index: 1000; /* Đặt z-index cao để modal nằm trên các phần tử khác */
+      }
+
+      .close {
+        cursor: pointer; /* Thay đổi con trỏ khi di chuột vào nút đóng */
+        text-align: right; /* Căn lề phải cho nút đóng */
+      }
+      .modal.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div style="text-align: center; color: red; font-size: 30px; top: 20%">
+        <b>Chúc mừng ngày phụ nữ Việt Nam</b>
+      </div>
+      <di style="justify-content: center; justify-items: center">
+        <div class="letter" id="letter">📩</div>
+       <div> <img src="./heartAnimation.gif" alt="" width="100%"></div>
+        <div class="modal" id="modal">
+          <div class="close" id="close">❌</div>
+
+<div style="position: relative; text-align: center;">
+    <h2 style="margin-bottom: 0; position: relative; z-index: 1;">
+        Chúc bạn Hạnh 20/10 vui vẻ. Luôn hạnh phúc và bình an <3
+    </h2>
+    <span style="display: inline-block; position: absolute; top: 0; left: 50%; transform: translateX(-50%); z-index: -1;">
+        <img 
+            src="https://cdn.pixabay.com/animation/2024/05/30/21/31/21-31-38-503_512.gif" 
+            alt=""
+            style="width: 200px;" 
+        >
+    </span>
+    <h6>
+        P/s: Ý là cũng không định làm đâu mà thấy share bài tội nghiệp quá :v
+    </h6>
+</div>
+
+          
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const letter = document.getElementById("letter");
+      const modal = document.getElementById("modal");
+      const close = document.getElementById("close");
+
+      letter.addEventListener("click", () => {
+        modal.classList.add("active");
+      });
+
+      close.addEventListener("click", () => {
+        modal.classList.remove("active");
+      });
+
+      // Bắt đầu hiệu ứng đánh chữ
+      const greetingElement = document.getElementById("greeting");
+      const greetingText = greetingElement.innerHTML;
+      let index = 0;
+
+      function typeGreeting() {
+        if (index < greetingText.length) {
+          greetingElement.innerHTML = greetingText.substring(0, index + 1);
+          index++;
+          setTimeout(typeGreeting, 200); // Thay đổi tốc độ đánh chữ tại đây
+        } else {
+          greetingElement.style.opacity = 1; // Hiện văn bản sau khi hoàn thành
+        }
+      }
+
+      typeGreeting(); // Bắt đầu hiệu ứng đánh chữ
+    </script>
+  </body>
+</html>
